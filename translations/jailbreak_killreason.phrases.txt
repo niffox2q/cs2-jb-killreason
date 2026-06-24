@@ -1,0 +1,81 @@
+"Phrases"
+{
+    "Prefix"
+    {
+        "ru"    "{DEFAULT}[{GREEN}KillReason{DEFAULT}]"
+        "en"    "{DEFAULT}[{GREEN}KillReason{DEFAULT}]"
+        "ua"    "{DEFAULT}[{GREEN}KillReason{DEFAULT}]"
+    }
+    "OnlyCTCanUse"
+    {
+        "ru"    "Эту команду могут использовать только Охранники."
+        "en"    "Only Guards can use this command."
+        "ua"    "Цю команду можуть використовувати лише Охоронці."
+    }
+    "OnlyAliveCanUse"
+    {
+        "ru"    "Эту команду можно использовать только пока Вы живы."
+        "en"    "This command can only be used while you are alive."
+        "ua"    "Цю команду можна використовувати лише поки Ви живі."
+    }
+    "NoAvailableReasons"
+    {
+        "ru"    "Нет доступных причин."
+        "en"    "No available reasons."
+        "ua"    "Немає доступних причин."
+    }
+    "PlayerNotFoundReopening"
+    {
+        "ru"    "Ошибка. Выбранный игрок не найден. Он будет удалён из списка."
+        "en"    "Error. Selected player not found. Removing from the list."
+        "ua"    "Помилка. Вибраного гравця не знайдено. Його буде видалено зі списку."
+    }
+    "ErrorDetectedPlayerAliveOrUnavailable"
+    {
+        "ru"    "Ошибка. Выбранный игрок не найден или живой. Он будет удалён из списка."
+        "en"    "Error. Selected player is either alive or unavailable. Removing from the list."
+        "ua"    "Помилка. Вибраний гравець не знайдений або живий. Його буде видалено зі списку."
+    }
+    "ErrorWithReason"
+    {
+        "ru"    "Произошла неизвестная ошибка при выборе причины. Повторите попытку или обратитесь к администратору."
+        "en"    "An unknown error occurred while selecting a reason. Try again or contact an admin."
+        "ua"    "Сталася невідома помилка при виборі причини. Спробуйте ще раз або зверніться до адміністратора."
+    }
+    "KillReasonChat"
+    {
+        "ru"    "Охранник {LIGHTRED}%s{DEFAULT} убил заключенного {GREEN}%s{DEFAULT} с причиной: %s"
+        "en"    "Guard {LIGHTRED}%s{DEFAULT} killed prisoner {GREEN}%s{DEFAULT} for reason: %s"
+        "ua"    "Охоронець {LIGHTRED}%s{DEFAULT} вбив ув'язненого {GREEN}%s{DEFAULT} з причини: %s"
+    }
+    "NotRevivedDueNotEnoughtPrisoners"
+    {
+        "ru"    "Не удалось воскресить игрока, недостаточно живых заключенных для этого."
+        "en"    "Failed to respawn the player, not enough alive prisoners."
+        "ua"    "Не вдалося відродити гравця, недостатньо живих ув'язнених для цього."
+    }
+    "YouRevivedByReason"
+    {
+        "ru"    "Вас воскресил Охранник, который Вас убил."
+        "en"    "You have been respawned by the Guard who killed you."
+        "ua"    "Вас відродив Охоронець, який Вас вбив."
+    }
+    "MainMenuTitle"
+    {
+        "ru"    "Выберите убитого: "
+        "en"    "Select a killed player: "
+        "ua"    "Виберіть вбитого: "
+    }
+    "ReasonMenuTitle"
+    {
+        "ru"    "Выберите причину: "
+        "en"    "Select a reason: "
+        "ua"    "Виберіть причину: "
+    }
+    "NoAvailablePrisoners"
+    {
+        "ru"    "Нет доступных заключенных."
+        "en"    "No available prisoners."
+        "ua"    "Немає доступних ув'язнених."
+    }
+}
