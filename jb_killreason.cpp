@@ -180,54 +180,56 @@ void OpenReasonMenu(int iGuard, int iTarget) {
             return;
         }
 
-        auto gController = CCSPlayerController::FromSlot(iSlot);
-        if (!gController || gController->GetTeam() != CS_TEAM_CT) return;
+        if (iItem  < 7) {
+            auto gController = CCSPlayerController::FromSlot(iSlot);
+            if (!gController || gController->GetTeam() != CS_TEAM_CT) return;
 
-        auto pController = CCSPlayerController::FromSlot(iTarget);
-        if (!pController || !pController->IsConnected() || pController->GetTeam() != CS_TEAM_T) {
-            auto it = std::find(g_mGuardKills[iSlot].begin(),g_mGuardKills[iSlot].end(),iTarget);
-            if (it != g_mGuardKills[iSlot].end()) {
-                g_mGuardKills[iSlot].erase(it);
-                PrintSlotPrefixed(iSlot,GetTranslation("PlayerNotFoundReopening"));
-                OpenKRMenu(iSlot);
-                return;
-            }
-        }
-        auto pPawn = pController->GetPlayerPawn();
-        if (!pPawn || pPawn->IsAlive()) {
-            auto it = std::find(g_mGuardKills[iSlot].begin(),g_mGuardKills[iSlot].end(),iTarget);
-            if (it != g_mGuardKills[iSlot].end()) {
-                g_mGuardKills[iSlot].erase(it);
-                PrintSlotPrefixed(iSlot,GetTranslation("ErrorDetectedPlayerAliveOrUnavailable"));
-                OpenKRMenu(iSlot);
-                return;
-            }
-        }
-
-        std::string sKeyReason(szBack);
-
-        auto it = g_mReasons.find(sKeyReason);
-        if (it == g_mReasons.end()) {
-            PrintSlotPrefixed(iSlot,GetTranslation("ErrorWithReason"));
-            return;
-        } else {
-            char msg[512];
-            g_SMAPI->Format(msg,sizeof(msg),GetTranslation("KillReasonChat"),gController->GetPlayerName(),pController->GetPlayerName(), it->second.sReason.c_str());
-            PrintAllPrefixed(msg);
-            if (it->second.bRespawn) {
-                if (GetAlivePrisoners().size() < g_iMinimumPrisonersRequired) {
-                    PrintSlotPrefixed(iSlot,GetTranslation("NotRevivedDueNotEnoughtPrisoners"));
+            auto pController = CCSPlayerController::FromSlot(iTarget);
+            if (!pController || !pController->IsConnected() || pController->GetTeam() != CS_TEAM_T) {
+                auto it = std::find(g_mGuardKills[iSlot].begin(),g_mGuardKills[iSlot].end(),iTarget);
+                if (it != g_mGuardKills[iSlot].end()) {
+                    g_mGuardKills[iSlot].erase(it);
+                    PrintSlotPrefixed(iSlot,GetTranslation("PlayerNotFoundReopening"));
+                    OpenKRMenu(iSlot);
                     return;
                 }
-                players_api->Respawn(iTarget);
-                PrintSlotPrefixed(iTarget,GetTranslation("YouRevivedByReason"));
-                
+            }
+            auto pPawn = pController->GetPlayerPawn();
+            if (!pPawn || pPawn->IsAlive()) {
+                auto it = std::find(g_mGuardKills[iSlot].begin(),g_mGuardKills[iSlot].end(),iTarget);
+                if (it != g_mGuardKills[iSlot].end()) {
+                    g_mGuardKills[iSlot].erase(it);
+                    PrintSlotPrefixed(iSlot,GetTranslation("ErrorDetectedPlayerAliveOrUnavailable"));
+                    OpenKRMenu(iSlot);
+                    return;
+                }
             }
 
-            for (auto& data : g_mGuardKills){
-            auto& killVector = data.second;
-            killVector.erase(std::remove(killVector.begin(), killVector.end(), iTarget), killVector.end());
-        }
+            std::string sKeyReason(szBack);
+
+            auto it = g_mReasons.find(sKeyReason);
+            if (it == g_mReasons.end()) {
+                PrintSlotPrefixed(iSlot,GetTranslation("ErrorWithReason"));
+                return;
+            } else {
+                char msg[512];
+                g_SMAPI->Format(msg,sizeof(msg),GetTranslation("KillReasonChat"),gController->GetPlayerName(),pController->GetPlayerName(), it->second.sReason.c_str());
+                PrintAllPrefixed(msg);
+                if (it->second.bRespawn) {
+                    if (GetAlivePrisoners().size() < g_iMinimumPrisonersRequired) {
+                        PrintSlotPrefixed(iSlot,GetTranslation("NotRevivedDueNotEnoughtPrisoners"));
+                        
+                    } else {
+                        players_api->Respawn(iTarget);
+                        PrintSlotPrefixed(iTarget,GetTranslation("YouRevivedByReason"));
+                    }
+                }
+
+                for (auto& data : g_mGuardKills){
+                    auto& killVector = data.second;
+                    killVector.erase(std::remove(killVector.begin(), killVector.end(), iTarget), killVector.end());
+                }
+            }
         }
         OpenKRMenu(iSlot);
     });
@@ -277,32 +279,35 @@ void OpenKRMenu(int iSlot) {
             return;
         }
 
-        auto gController = CCSPlayerController::FromSlot(iSlot);
-        if (!gController || gController->GetTeam() != CS_TEAM_CT) return;
+        if (iItem < 7) {
+            auto gController = CCSPlayerController::FromSlot(iSlot);
+            if (!gController || gController->GetTeam() != CS_TEAM_CT) return;
 
-        int iTarget = atoi(szBack);
-        auto pController = CCSPlayerController::FromSlot(iTarget);
-        if (!pController || !pController->IsConnected() || pController->GetTeam() != CS_TEAM_T) {
-            auto it = std::find(g_mGuardKills[iSlot].begin(),g_mGuardKills[iSlot].end(),iTarget);
-            if (it != g_mGuardKills[iSlot].end()) {
-                g_mGuardKills[iSlot].erase(it);
-                PrintSlotPrefixed(iSlot,GetTranslation("PlayerNotFoundReopening"));
-                OpenKRMenu(iSlot);
-                return;
+            int iTarget = atoi(szBack);
+            auto pController = CCSPlayerController::FromSlot(iTarget);
+            if (!pController || !pController->IsConnected() || pController->GetTeam() != CS_TEAM_T) {
+                auto it = std::find(g_mGuardKills[iSlot].begin(),g_mGuardKills[iSlot].end(),iTarget);
+                if (it != g_mGuardKills[iSlot].end()) {
+                    g_mGuardKills[iSlot].erase(it);
+                    PrintSlotPrefixed(iSlot,GetTranslation("PlayerNotFoundReopening"));
+                    OpenKRMenu(iSlot);
+                    return;
+                }
             }
-        }
-        auto pPawn = pController->GetPlayerPawn();
-        if (!pPawn || pPawn->IsAlive()) {
-            auto it = std::find(g_mGuardKills[iSlot].begin(),g_mGuardKills[iSlot].end(),iTarget);
-            if (it != g_mGuardKills[iSlot].end()) {
-                g_mGuardKills[iSlot].erase(it);
-                PrintSlotPrefixed(iSlot,GetTranslation("ErrorDetectedPlayerAliveOrUnavailable"));
-                OpenKRMenu(iSlot);
-                return;
+            auto pPawn = pController->GetPlayerPawn();
+            if (!pPawn || pPawn->IsAlive()) {
+                auto it = std::find(g_mGuardKills[iSlot].begin(),g_mGuardKills[iSlot].end(),iTarget);
+                if (it != g_mGuardKills[iSlot].end()) {
+                    g_mGuardKills[iSlot].erase(it);
+                    PrintSlotPrefixed(iSlot,GetTranslation("ErrorDetectedPlayerAliveOrUnavailable"));
+                    OpenKRMenu(iSlot);
+                    return;
+                }
             }
+            OpenReasonMenu(iSlot,iTarget);
         }
 
-        OpenReasonMenu(iSlot,iTarget);
+        
     });
 
     menus_api->DisplayPlayerMenu(hMenu,iSlot,true,true);
@@ -450,4 +455,4 @@ const char* jb_killreason::GetLicense() { return "GPL"; }
 const char* jb_killreason::GetLogTag() { return "[JB] Kill Reason"; }
 const char* jb_killreason::GetName() { return "[JB] Kill Reason"; }
 const char* jb_killreason::GetURL() { return "https://t.me/niffox_2q"; }
-const char* jb_killreason::GetVersion() { return "1.0.0"; }
+const char* jb_killreason::GetVersion() { return "1.0.1"; }
